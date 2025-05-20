@@ -1,58 +1,38 @@
-const produtoRepository = require('../repository/produto_repository')
+let produtos = [];
 
 function listar() {
-    return produtoRepository.listar();
-}
-
-function inserir(produto) {
-    if(produto && produto.nome 
-        && produto.categoria && produto.preco){
-            return produtoRepository.inserir(produto);
-    }
-    else {
-        throw { id: 400, msg: "Produto sem dados corretos"}
-    }
+  return produtos;
 }
 
 function buscarPorId(id) {
-    let produto = produtoRepository.buscarPorId(id);
-    if(produto) {
-        return produto;
-    }
-    else {
-        throw { id: 404, msg: "Produto não encontrado!" }
-    }
+  const produto = produtos.find(p => p.id === id);
+  if (!produto) throw { id: 404, message: 'Produto não encontrado' };
+  return produto;
 }
 
-function atualizar(id, produto) {
-    if(produto && produto.nome && produto.categoria && produto.preco) {
-        const produtoAtualizado = produtoRepository.atualizar(id, produto);
-        if(produtoAtualizado) {
-            return produtoAtualizado;
-        }        
-        else {
-            throw {id:404, msg: "Produto não encontrado"};
-        }
-    }
-    else {
-        throw {id:400, msg: "Produto sem dados corretos"};
-    }
+function inserir(produto) {
+  produto.id = produtos.length + 1;
+  produtos.push(produto);
 }
 
-function deletar(id) {
-    let produto = produtoRepository.deletar(id);
-    if(produto) {
-        return produto;
-    }
-    else {
-        throw { id: 404, msg: "Produto não encontrado!" }
-    }
+function atualizar(id, dados) {
+  const produto = produtos.find(p => p.id === id);
+  if (!produto) throw { id: 404, message: 'Produto não encontrado' };
+  produto.nome = dados.nome;
+  produto.preco = dados.preco;
+  return produto;
+}
+
+function remover(id) {
+  const index = produtos.findIndex(p => p.id === id);
+  if (index === -1) throw { id: 404, message: 'Produto não encontrado' };
+  produtos.splice(index, 1);
 }
 
 module.exports = {
-    listar,
-    inserir,
-    buscarPorId,
-    atualizar,
-    deletar
-}
+  listar,
+  buscarPorId,
+  inserir,
+  atualizar,
+  remover
+};

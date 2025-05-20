@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema da Loja - Dance Academy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Sistema da Loja - Dance Academy</h1>
+
+  <!-- CRUD DE PRODUTOS -->
+  <section id="produto-section">
+    <h2>Produtos</h2>
+    <div class="form-group">
+      <input type="text" id="produto-nome" placeholder="Nome do Produto" />
+      <input type="number" id="produto-preco" placeholder="Preço" />
+      <button onclick="adicionarProduto()">Adicionar Produto</button>
+    </div>
+    <ul id="lista-produtos"></ul>
+  </section>
+
+  <!-- CRUD DE ALUNOS -->
+  <section id="aluno-section">
+    <h2>Alunos</h2>
+    <div class="form-group">
+      <input type="text" id="aluno-nome" placeholder="Nome do Aluno" />
+      <input type="text" id="aluno-escola" placeholder="Escola do Aluno" />
+      <button onclick="adicionarAluno()">Adicionar Aluno</button>
+    </div>
+    <ul id="lista-alunos"></ul>
+  </section>
+
+  <script src="main.js"></script>
+</body>
+</html>
